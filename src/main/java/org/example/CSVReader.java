@@ -3,6 +3,7 @@ package org.example;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 
 public class CSVReader {
@@ -16,7 +17,7 @@ public class CSVReader {
                 int id = Integer.parseInt(values[0]);
                 String firstName = values[1];
                 String lastName = values[2];
-                double salary = Double.parseDouble(values[3]);
+                BigDecimal salary = new BigDecimal(values[3].trim());
                 Integer managerId = values.length > 4 && !values[4].isEmpty() ? Integer.parseInt(values[4]) : null;
                 employees.put(id, new Employee(id, firstName, lastName, salary, managerId));
             }
