@@ -39,7 +39,8 @@ company-analyzer/
 │   │   │   ├── Employee.java              # Represents an employee
 │   │   │   └── Main.java                  # Entry point for the application
 │   │   └── resources/
-│   │       └── employeesv2.csv            # Sample CSV file with employee data
+│   │       └── employeesv2.csv            # Sample CSV file with more employee data
+│   │       └── employeesv.csv             # Sample CSV file from document (fewer data) 
 │   └── test/
 │       └── java/org/example/
 │           └── CompanyAnalyzerTest.java   # Unit tests for CompanyAnalyzer
@@ -54,7 +55,7 @@ company-analyzer/
 ### 1. Clone the Repository
 ```bash
 git clone <repository-url>
-cd company-analyzer
+cd code106
 ```
 
 ### 2. Build the Project
