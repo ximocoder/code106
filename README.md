@@ -36,7 +36,8 @@ company-analyzer/
 ├── src/
 │   ├── main/
 │   │   ├── java/org/example/
-│   │   │   ├── CompanyAnalyzer.java       # Analyzes salary violations and reporting lines
+│   │   │   ├── CompanyAnalyzer.java       # Analyzes salary violations and reporting lines using Java
+│   │   │   ├── CompanyAnalyzerSql.java    # Analyzes salary violations and reporting lines using SQL
 │   │   │   ├── CSVReader.java             # Reads employee data from a CSV file
 │   │   │   ├── Employee.java              # Represents an employee
 │   │   │   └── Main.java                  # Entry point for the application
@@ -149,7 +150,7 @@ mvn test
 
 ## Future Improvements
 1. **Error Handling**: Add better error handling for invalid CSV files or missing data.
-2. **Use an inmemory sqlite Db**: Instead of java code for the queries use a proper domain language
+2. ~~**Use an in-memory SQLite DB**: Instead of Java code for the queries, use a proper domain language~~
 3. **Performance Optimization**: Cache reporting line depths and precompute subordinate lists for better performance.
 4. **Logging**: Use a logging framework (e.g., Log4j) instead of printing to the console.
 5. **GUI**: Add a simple GUI for easier interaction with the application.

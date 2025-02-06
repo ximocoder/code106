@@ -1,5 +1,6 @@
 package org.example;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,5 +18,17 @@ public class Main {
         System.out.println("\n=== Reporting Line Issues ===");
         List<String> reportingIssues = analyzer.findLongReportingLines();
         reportingIssues.forEach(System.out::println);
+
+
+        System.out.println("\n=== Running the Sql version ===");
+        CompanyAnalyzerSql analyzerSql = new CompanyAnalyzerSql(filePath);
+
+        try {
+            analyzerSql.findSalaryViolations();
+            analyzerSql.findReportingLineIssues();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
