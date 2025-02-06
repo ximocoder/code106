@@ -1,5 +1,10 @@
 # Company Analyzer
 
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![GitHub Stars](https://img.shields.io/github/stars/ximocoder/code106?style=social)
+![GitHub Contributors](https://img.shields.io/github/contributors/ximocoder/code106)
+![GitHub Last Commit](https://img.shields.io/github/last-commit/ximocoder/code106)
+
 This is a Java-based application designed to analyze the organizational structure of a company. It reads employee data from a CSV file and identifies:
 1. **Salary Violations**: Managers who earn less than 20% or more than 50% of the average salary of their direct subordinates.
 2. **Long Reporting Lines**: Employees who have more than 4 managers between them and the CEO.
