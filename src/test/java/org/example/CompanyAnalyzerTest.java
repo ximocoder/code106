@@ -36,7 +36,7 @@ public class CompanyAnalyzerTest {
         assertFalse(violations.isEmpty(), "Salary violations should be detected");
 
         // Checking expected violations
-        assertTrue(violations.stream().anyMatch(v -> v.contains("Bob")), "Bob should have a salary check issue");
+        assertTrue(violations.stream().anyMatch(v -> v.contains("Alice")), "Alice should have a salary check issue");
     }
 
     @Test
