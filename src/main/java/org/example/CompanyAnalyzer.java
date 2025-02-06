@@ -1,5 +1,6 @@
 package org.example;
 
+import java.math.RoundingMode;
 import java.util.*;
 import java.math.BigDecimal;
 
@@ -15,25 +16,36 @@ public class CompanyAnalyzer {
 
         for (Employee manager : employees.values()) {
             List<Employee> subordinates = getSubordinates(manager.getId());
+
             if (subordinates.isEmpty()) continue;
 
-            // Calculate average salary of subordinates
-            BigDecimal avgSalary = subordinates.stream()
-                    .map(Employee::getSalary)
-                    .reduce(BigDecimal.ZERO, BigDecimal::add) // Sum all salaries
-                    .divide(BigDecimal.valueOf(subordinates.size()), 2, BigDecimal.ROUND_HALF_UP); // Average
+            BigDecimal sum = BigDecimal.ZERO;
+            int count = 0;
 
-            BigDecimal minSalary = avgSalary.multiply(new BigDecimal("1.2"));
-            BigDecimal maxSalary = avgSalary.multiply(new BigDecimal("1.5"));
+            for (Employee e : subordinates) {
+                if (e.getManagerId() != null && e.getManagerId().equals(manager.getId())) {
+                    sum = sum.add(e.getSalary());
+                    count++;
+                }
+            }
+
+            if (count == 0) continue;
+
+            BigDecimal avgSalary = sum.divide(BigDecimal.valueOf(count), 10, RoundingMode.HALF_UP);
+            BigDecimal minSalary = avgSalary.multiply(new BigDecimal("1.2")).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal maxSalary = avgSalary.multiply(new BigDecimal("1.5")).setScale(2, RoundingMode.HALF_UP);
 
             if (manager.getSalary().compareTo(minSalary) < 0) {
-                violations.add(manager.getFirstName() + " earns LESS than required by " + minSalary.subtract(manager.getSalary()));
+                violations.add(manager.getFirstName() + " earns LESS than required by "
+                        + minSalary.subtract(manager.getSalary()));
             } else if (manager.getSalary().compareTo(maxSalary) > 0) {
-                violations.add(manager.getFirstName() + " earns MORE than allowed by " + manager.getSalary().subtract(maxSalary));
+                violations.add(manager.getFirstName() + " earns MORE than allowed by "
+                        + manager.getSalary().subtract(maxSalary));
             }
         }
         return violations;
     }
+
 
     public List<String> findLongReportingLines() {
         List<String> reportingIssues = new ArrayList<>();
@@ -49,13 +61,16 @@ public class CompanyAnalyzer {
 
     private List<Employee> getSubordinates(int managerId) {
         List<Employee> subordinates = new ArrayList<>();
+
         for (Employee e : employees.values()) {
-            if (e.getManagerId() != null && e.getManagerId() == managerId) {
+            if (e.getManagerId() != null && e.getManagerId().equals(managerId)) {
                 subordinates.add(e);
             }
         }
+
         return subordinates;
     }
+
 
     private int getReportingDepth(int employeeId) {
         int depth = 0;
